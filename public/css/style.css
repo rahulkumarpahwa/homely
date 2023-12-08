@@ -1,0 +1,151 @@
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.containers {
+  flex: 1;
+}
+
+.banner {
+  margin-top: 8rem;
+  text-align: center;
+  font-size: 10rem;
+  color: #005c7a !important;
+  padding: 3rem;
+}
+
+span {
+  color: #61e212 !important;
+}
+.nav-link {
+  color: black !important;
+}
+.nav-brand {
+  color: #005c7a !important;
+  font-weight: 800 !important;
+  font-size: 2rem !important;
+}
+
+.nav-underline > .nav-item {
+  margin-right: 2rem;
+}
+
+.nav {
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+.donate-btn {
+  font-size: 1.5rem !important;
+  transition: transform 0.2s;
+}
+
+.btn:hover {
+  transform: scale(1.04);
+  color: white !important;
+  background-color: black !important;
+}
+
+.footer-div {
+  background-color: #004156;
+  margin-top: 2rem;
+  padding: 2rem 1rem 2rem 1rem;
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+.footer-div .row {
+  height: 4rem;
+}
+
+.footer-div-two {
+  background-color: #005c7a;
+  color: white !important;
+  height: 5rem;
+  padding: 0 2rem 0 2rem;
+  font-size: 1.1rem;
+  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-brand {
+  font-weight: 800 !important;
+  font-size: 2rem !important;
+  text-decoration: none;
+  color: white;
+}
+.privacy {
+  color: white;
+}
+
+.content-2 {
+  background-color: #005c7a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40rem;
+  margin-bottom: 4rem;
+}
+.content-2-div {
+  margin: auto;
+  width: 70%;
+  font-size: 4rem;
+  color: white;
+}
+
+.content-2-link a {
+  font-size: 1.5rem;
+  color: #fff !important;
+}
+
+.content-3-div {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: flex-start;
+}
+
+.content-3-div-1 {
+  font-size: 6rem;
+  line-height: 7rem;
+  font-weight: 700;
+  color: #005c7a;
+}
+
+.content-3-div-2 {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+}
+.content-3-div-2 div {
+  height: 18.75rem;
+  padding: 2rem;
+  border: 0.5rem solid #005c7a;
+  margin: 2rem 0 2rem 0;
+  font-size: 1.6rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+}
+
+.content-3-div-2 div h4 {
+  font-weight: 700;
+  font-size: 1.75rem;
+  color: #005c7a;
+}
+
+.content-3-div-2 div button {
+  font-size: 1.5rem;
+}
+
+.pic0 {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 70%;
+margin-bottom: 2rem;
+}

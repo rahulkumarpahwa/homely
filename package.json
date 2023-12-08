@@ -1,0 +1,19 @@
+{
+  "engine": {
+    "node": "18.17.1"
+  },
+  "name": "homely",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Rahul Kumar",
+  "license": "ISC",
+  "dependencies": {
+    "ejs-mate": "^4.0.0",
+    "express": "^4.18.2",
+    "path": "^0.12.7"
+  }
+}
