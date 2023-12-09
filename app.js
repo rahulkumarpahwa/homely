@@ -13,7 +13,8 @@ app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "/views"));
 
 app.get ("/", (req,res)=>{
-res.send("this is root!");
+// res.send("this is root!");
+res.redirect("/homely");
 });
 
 app.get("/homely", (req,res)=>{

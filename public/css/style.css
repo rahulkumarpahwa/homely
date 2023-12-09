@@ -86,8 +86,9 @@ span {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 40rem;
+  height: 100%;
   margin-bottom: 4rem;
+  padding: 4rem 0 4rem 0;
 }
 .content-2-div {
   margin: auto;
