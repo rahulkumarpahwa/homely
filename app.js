@@ -1,6 +1,17 @@
 const express = require("express");
 const path = require("path");
 const ejsMate = require("ejs-mate");
+const Donor = require("./models/donor");
+const mongoose = require("mongoose");
+
+main().catch((err) => console.log(err));
+
+async function main() {
+  await mongoose.connect("mongodb://127.0.0.1:27017/test");
+
+}
+
+
 
 const app = express();
 app.engine("ejs", ejsMate); 
@@ -23,15 +34,19 @@ res.render("main/homely.ejs");
 });
 
 app.get("/homely/get-involved", (req, res) => {
-  res.send(" this is the get-involved page");
+ res.render("main/getInvolved.ejs");
 });
 
 app.get("/homely/about", (req, res) => {
-  res.send(" this is the about page");
+  res.render("main/about.ejs");
 });
 
 app.get("/homely/donate", (req, res) => {
-  res.send(" this is the donate page");
+ res.render("main/donate.ejs");
+});
+
+app.post("/homely/donate",(req,res)=>{
+let 
 });
 
 app.listen(8080, ()=>{
