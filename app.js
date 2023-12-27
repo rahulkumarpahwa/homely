@@ -45,8 +45,10 @@ app.get("/homely/donate", (req, res) => {
  res.render("main/donate.ejs");
 });
 
-app.post("/homely/donate",(req,res)=>{
-let 
+app.post("/homely/donate", async(req,res)=>{
+  console.log(req.body.donor);
+// await Donor.create(...req.body.donor);
+// res.send("/homely/donate");
 });
 
 app.listen(8080, ()=>{

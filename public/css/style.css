@@ -2,7 +2,9 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  overflow-x: hidden; /* Hide horizontal scrollbar */
 }
+
 .containers {
   flex: 1;
 }
@@ -148,5 +150,21 @@ span {
   margin-left: auto;
   margin-right: auto;
   width: 70%;
-margin-bottom: 2rem;
+  margin-bottom: 2rem;
+}
+
+.donate-form {
+  border: 0.3rem solid #005c7a;
+  margin: 1rem;
+  padding: 1rem;
+  border-radius: 20px;
+}
+
+.donations {
+  background-color: #005c7a;
+  height: 40vh;
+  text-align: center;
+  color: white;
+  padding: 2rem;
+  margin: 1rem 0 1rem 0;
 }

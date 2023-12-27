@@ -15,7 +15,7 @@ const donorSchema = new mongoose.Schema({
   },
   paymentMethod: {
     type: String,
-    enum: ["Gpay", "PhonePe", "UPI", "Card", "Net-Banking"],
+    enum: ["Gpay", "PhonePe", "Patym" ,"UPI", "Card", "Net-Banking"],
     required: true,
   },
   amount: {
