@@ -1,26 +1,25 @@
 const express = require("express");
 const profileRouter = express.Router();
+const bycrpt = require("bcrypt");
+const validator = require("validator");
 const { userAuth } = require("../middlewares/auth.js");
+const { editValidation } = require("../utils/validation.js");
 
 profileRouter.get("/view", userAuth, (req, res) => {
   try {
-    // const user = req.user;
-    res.json("this is the user profile route!");
+    const user = req.user;
+    res.json({ success: true, status: 200, data: user });
   } catch (error) {
     res
       .status(400)
       .json({ success: false, status: 400, message: error.message });
   }
 });
-
 
 profileRouter.patch("/edit", userAuth, (req, res) => {
   try {
-    // const user = req.user;
-    const ALLOWED_EDITS = ["address", "age", "firstName", "lastName" ];
-    
-
-
+    const user = req.user;
+    editValidation(req);
 
     res.json("this is the user profile route!");
   } catch (error) {
@@ -30,18 +29,36 @@ profileRouter.patch("/edit", userAuth, (req, res) => {
   }
 });
 
-
-profileRouter.get("/view", userAuth, (req, res) => {
+profileRouter.patch("/password", userAuth, async (req, res) => {
   try {
-    // const user = req.user;
-    res.json("this is the user profile route!");
+    const user = req.user;
+    const ALLOWED_EDITS = ["password", "confirmedPassword"];
+    const isAllowed = Object.keys(req.body).every((key) =>
+      ALLOWED_EDITS.includes(key)
+    );
+    if (!isAllowed) {
+      throw new Error("Password can't be updated!");
+    }
+    const { password, confirmedPassword } = req.body;
+    if (password !== confirmedPassword) {
+      throw new Error("Confirmed Password must be same !");
+    }
+    if (!validator.isStrongPassword(password)) {
+      throw new Error("Password Must be Strong!");
+    }
+    const newHashedPassword = await bycrpt.hash(password, 10);
+    user.password = newHashedPassword;
+    await user.save();
+    res.json({
+      success: true,
+      status: 200,
+      message: `${user.firstName}! Your password has been updated!`,
+    });
   } catch (error) {
     res
       .status(400)
       .json({ success: false, status: 400, message: error.message });
   }
 });
-
-
 
 module.exports = profileRouter;

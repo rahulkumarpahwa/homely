@@ -14,4 +14,22 @@ const validateSignUpData = (req) => {
   }
 };
 
-module.exports = { validateSignUpData };
+const editValidation = (req) => {
+  const ALLOWED_EDITS = ["address", "age", "firstName", "lastName"];
+  const isAllowed = Object.keys(req.body).every((key) =>
+    ALLOWED_EDITS.includes(key)
+  );
+  if (!isAllowed) {
+    throw new Error("Invalid Update!");
+  }
+  const { firstName, lastName, address, age } = req.body;
+  if (!firstName || !lastName) {
+    throw new Error("First Name or Last Name must exist!");
+  } else if (age < 18 || age > 150) {
+    throw new Error("Enter the valid age!");
+  } else if (!address) {
+    throw new Error("Address can't be empty!");
+  }
+};
+
+module.exports = { validateSignUpData, editValidation };
