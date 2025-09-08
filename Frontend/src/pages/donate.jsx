@@ -1,9 +1,6 @@
-import React from "react";
-
 const Donate = () => {
   return (
     <>
-      <Navbar />
       <div className="flex flex-col items-center mt-8 mb-16">
         <div className="w-full max-w-xl bg-white border-4 border-[#005c7a] rounded-2xl p-8 shadow-lg">
           <h3 className="mb-6 text-2xl font-bold text-[#005c7a]">
@@ -71,7 +68,6 @@ const Donate = () => {
           </form>
         </div>
       </div>
-      <Footer />
     </>
   );
 };

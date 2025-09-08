@@ -1,9 +1,6 @@
-import React from "react";
-import {Navbar} from "../components/Navbar.jsx"
 const Homely = () => {
   return (
     <>
-      <Navbar />
       <h1 className="mt-32 text-center text-[10rem] text-[#005c7a] font-bold py-12">
         Opening homes in times of crisis
       </h1>
@@ -18,7 +15,7 @@ const Homely = () => {
           natural disasters to large-scale conflicts.
           <div className="mt-8">
             <a
-              href="/homely/about"
+              href="/about"
               className="text-white underline text-2xl hover:text-[#61e212]"
             >
               Learn more about us
@@ -57,7 +54,6 @@ const Homely = () => {
           </div>
         </div>
       </div>
-      <Footer />
     </>
   );
 };

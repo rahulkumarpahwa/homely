@@ -3,6 +3,8 @@ import Homely from "./pages/homely";
 import About from "./pages/about";
 import Donate from "./pages/donate";
 import GetInvolved from "./pages/getInvolved";
+import {Navbar} from "./components/Navbar.jsx"
+import { Footer } from "./components/Footer.jsx";
 
 function App() {
   return (
