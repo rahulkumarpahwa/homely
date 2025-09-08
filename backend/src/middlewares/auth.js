@@ -1,3 +1,4 @@
+const { Token } = require("../models/token.js");
 const { User } = require("../models/user.js");
 const jwt = require("jsonwebtoken");
 
@@ -6,6 +7,10 @@ const userAuth = async (req, res, next) => {
     const { token } = req.cookies;
     if (!token) {
       throw new Error("Token Not Valid!");
+    }
+    const checkTokenBlacklist = await Token.findOne({ token: token });
+    if (checkTokenBlacklist) {
+      throw new Error("Token Not Valid! Try to Login!");
     }
     const decodedToken = await jwt.verify(token, process.env.JWT_SECRET);
     const { _id } = decodedToken;

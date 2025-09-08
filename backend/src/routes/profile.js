@@ -16,12 +16,22 @@ profileRouter.get("/view", userAuth, (req, res) => {
   }
 });
 
-profileRouter.patch("/edit", userAuth, (req, res) => {
+profileRouter.patch("/edit", userAuth, async (req, res) => {
   try {
     const user = req.user;
     editValidation(req);
+    const { firstName, lastName, address, age } = req.body;
+    user.firstName = firstName;
+    user.lastName = lastName;
+    user.address = address;
+    user.age = age;
+    await user.save();
 
-    res.json("this is the user profile route!");
+    res.json({
+      success: true,
+      status: 200,
+      message: `${firstName}, Your Profile has been updated!`,
+    });
   } catch (error) {
     res
       .status(400)
@@ -52,7 +62,7 @@ profileRouter.patch("/password", userAuth, async (req, res) => {
     res.json({
       success: true,
       status: 200,
-      message: `${user.firstName}! Your password has been updated!`,
+      message: `${user.firstName}, Your password has been updated!`,
     });
   } catch (error) {
     res

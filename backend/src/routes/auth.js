@@ -4,6 +4,7 @@ const jwt = require("jsonwebtoken");
 const { validateSignUpData } = require("../utils/validation.js");
 const { User } = require("../models/user.js");
 const { userAuth } = require("../middlewares/auth.js");
+const { Token } = require("../models/token.js");
 const authRouter = express.Router();
 
 authRouter.post("/signup", async (req, res) => {
@@ -67,8 +68,18 @@ authRouter.post("/login", async (req, res) => {
   }
 });
 
-authRouter.post("/logout", userAuth , (req, res) => {
+authRouter.post("/logout", userAuth, async (req, res) => {
+  // BlackListing the token:
+  const { token } = req.cookies;
+  const newTokenBlacklist = new Token({ token: token });
+  await newTokenBlacklist.save();
 
+  res.cookie("token", "", { expires: new Date(Date.now()) });
+  res.json({
+    success: true,
+    status: 200,
+    message: "User LoggedOut Successfully!",
+  });
 });
 
 module.exports = authRouter;
