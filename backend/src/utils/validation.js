@@ -32,4 +32,19 @@ const editValidation = (req) => {
   }
 };
 
-module.exports = { validateSignUpData, editValidation };
+const validateNewListing = (req) => {
+  const { title, description, imageUrl, address, owner, rating } = req.body;
+  if (!title || !description) {
+    throw new Error("Title and Description must exist!");
+  } else if (!validator.isURL(imageUrl)) {
+    throw new Error("Enter a valid Image URL");
+  } else if (!address) {
+    throw new Error("Address must Exist!");
+  } else if (rating > 5 && rating < 1) {
+    throw new Error("Enter a valid rating (1-5)");
+  } else if (owner.toString() !== req.user._id.toString()) {
+    throw new Error("Invalid User Entering Data!");
+  }
+};
+
+module.exports = { validateSignUpData, editValidation, validateNewListing };

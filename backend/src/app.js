@@ -6,6 +6,7 @@ const authRouter = require("./routes/auth.js");
 const profileRouter = require("./routes/profile.js");
 
 const cookieParser = require('cookie-parser');
+const listingRouter = require("./routes/listing.js");
 
 
 // middlewares: 
@@ -27,3 +28,4 @@ connectDB()
 
 app.use("/", authRouter);
 app.use("/profile", profileRouter);
+app.use("/list", listingRouter);

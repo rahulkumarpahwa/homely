@@ -82,4 +82,22 @@ authRouter.post("/logout", userAuth, async (req, res) => {
   });
 });
 
+authRouter.delete("/delete", userAuth, async (req, res) => {
+  // BlackListing the token:
+
+  const user = req.user;
+  const deletedUser = await User.findByIdAndDelete({ _id: user._id });
+
+  const { token } = req.cookies;
+  const newTokenBlacklist = new Token({ token: token });
+  await newTokenBlacklist.save();
+
+  res.cookie("token", "", { expires: new Date(Date.now()) });
+  res.json({
+    success: true,
+    status: 200,
+    message: `${deletedUser.firstName}, Your Account Deleted Successfully!`,
+  });
+});
+
 module.exports = authRouter;
