@@ -1,7 +1,7 @@
 const Homely = () => {
   return (
     <>
-      <h1 className="mt-32 text-center text-[10rem] text-[#005c7a] font-bold py-12">
+      <h1 className="text-center text-[10rem] text-[#005c7a] font-bold py-12">
         Opening homes in times of crisis
       </h1>
       <img
