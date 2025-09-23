@@ -5,6 +5,7 @@ import Donate from "./pages/donate";
 import GetInvolved from "./pages/getInvolved";
 import {Navbar} from "./components/Navbar.jsx"
 import { Footer } from "./components/Footer.jsx";
+import GetHelp from "./pages/gethelp.jsx";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/donate" element={<Donate />} />
         <Route path="/getinvolved" element={<GetInvolved />} />
+        <Route path="/gethelp" element={<GetHelp />} />
       </Routes>
       <Footer />
     </BrowserRouter>
