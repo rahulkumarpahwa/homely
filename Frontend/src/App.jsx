@@ -3,9 +3,10 @@ import Homely from "./pages/homely";
 import About from "./pages/about";
 import Donate from "./pages/donate";
 import GetInvolved from "./pages/getInvolved";
-import {Navbar} from "./components/Navbar.jsx"
+import { Navbar } from "./components/Navbar.jsx";
 import { Footer } from "./components/Footer.jsx";
 import GetHelp from "./pages/gethelp.jsx";
+import { Login } from "./pages/Login.jsx";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/donate" element={<Donate />} />
         <Route path="/getinvolved" element={<GetInvolved />} />
         <Route path="/gethelp" element={<GetHelp />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
       <Footer />
     </BrowserRouter>
