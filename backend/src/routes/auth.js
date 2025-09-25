@@ -26,10 +26,16 @@ authRouter.post("/signup", async (req, res) => {
     });
 
     await newUser.save();
+    // generating the token here as well and sending
+    const token = await jwt.sign({ _id: newUser._id }, process.env.JWT_SECRET, {
+      expiresIn: "2h",
+    });
+    res.cookie("token", token, { expires: new Date(Date.now() + 3600000) });
     res.json({
       success: true,
       status: 200,
       message: `${firstName} has Signup Successfully!`,
+      user: newUser,
     });
   } catch (error) {
     res
@@ -60,6 +66,7 @@ authRouter.post("/login", async (req, res) => {
       success: true,
       status: 200,
       message: `${user.firstName} has Login Successfully!`,
+      user: user,
     });
   } catch (error) {
     res

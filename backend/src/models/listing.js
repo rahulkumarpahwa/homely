@@ -17,9 +17,10 @@ const listingSchema = new mongoose.Schema(
       trim: true,
     },
     imageUrl: {
-      type: String,
-      default:
+      type: [String], // array of string
+      default: [
         "https://res.cloudinary.com/dwtcjjxwc/image/upload/v1702025115/pic0_hb6pwl.jpg",
+      ],
       validation(value) {
         if (!validator.isURL(value)) {
           throw new Error("Enter a Valid Image URL");
@@ -30,6 +31,21 @@ const listingSchema = new mongoose.Schema(
       type: String,
       maxLength: 300,
       required: true,
+      unique: true, // based upon it is found the listing is unique or not!
+    },
+    location: {
+      zip: {
+        type: Number,
+        required: true,
+      },
+      city: {
+        type: String,
+        required: true,
+      },
+      country: {
+        type: String,
+        required: true,
+      },
     },
     owner: {
       type: mongoose.Schema.Types.ObjectId,
