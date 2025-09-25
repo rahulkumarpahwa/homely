@@ -7,6 +7,7 @@ import { Navbar } from "./components/Navbar.jsx";
 import { Footer } from "./components/Footer.jsx";
 import GetHelp from "./pages/gethelp.jsx";
 import { Login } from "./pages/Login.jsx";
+import DashBoard from "./pages/DashBoard.jsx";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/getinvolved" element={<GetInvolved />} />
         <Route path="/gethelp" element={<GetHelp />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/dashboard" element={<DashBoard />} />
       </Routes>
       <Footer />
     </BrowserRouter>
