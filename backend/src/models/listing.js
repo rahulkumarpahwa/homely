@@ -27,20 +27,26 @@ const listingSchema = new mongoose.Schema(
         }
       },
     },
-    address: {
+    street: {
       type: String,
       maxLength: 300,
       required: true,
       unique: true, // based upon it is found the listing is unique or not!
     },
     location: {
-      zip: {
-        type: Number,
-        required: true,
-      },
       city: {
         type: String,
         required: true,
+      },
+      state: {
+        type: String,
+        required: true,
+      },
+      postalcode: {
+        type: String,
+        required: true,
+        maxLength: 6,
+        minLength: 6,
       },
       country: {
         type: String,
@@ -57,6 +63,22 @@ const listingSchema = new mongoose.Schema(
       min: 1,
       max: 5,
       default: 1,
+    },
+    map: {
+      lat: {
+        type: String,
+      },
+      lon: {
+        type: String,
+      },
+      boxbounding: {
+        type: [String],
+        validation(value) {
+          if (value.length != 4) {
+            throw new Error("Box Bounding Must contain the four values!");
+          }
+        },
+      },
     },
   },
   { timestamps: true }
