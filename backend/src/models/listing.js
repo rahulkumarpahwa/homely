@@ -21,11 +21,6 @@ const listingSchema = new mongoose.Schema(
       default: [
         "https://res.cloudinary.com/dwtcjjxwc/image/upload/v1702025115/pic0_hb6pwl.jpg",
       ],
-      validation(value) {
-        if (!validator.isURL(value)) {
-          throw new Error("Enter a Valid Image URL");
-        }
-      },
     },
     street: {
       type: String,

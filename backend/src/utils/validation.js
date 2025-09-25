@@ -33,17 +33,32 @@ const editValidation = (req) => {
 };
 
 const validateNewListing = (req) => {
-  const { title, description, imageUrl, address, owner, rating } = req.body;
+  const { title, description, imageUrl, street, location, owner, rating } =
+    req.body;
   if (!title || !description) {
     throw new Error("Title and Description must exist!");
-  } else if (!validator.isURL(imageUrl)) {
-    throw new Error("Enter a valid Image URL");
-  } else if (!address) {
-    throw new Error("Address must Exist!");
+  } else if (!street) {
+    throw new Error("Address/Street must Exist!");
   } else if (rating > 5 && rating < 1) {
     throw new Error("Enter a valid rating (1-5)");
   } else if (owner.toString() !== req.user._id.toString()) {
     throw new Error("Invalid User Entering Data!");
+  }
+
+  const isImageSafe = imageUrl.every((value) => validator.isURL(value));
+  if (!isImageSafe) {
+    throw new Error("Enter a valid Image Url!");
+  }
+
+  const { city, state, postalcode, country } = location;
+  if (!city) {
+    throw new Error("City must Exist");
+  } else if (!state) {
+    throw new Error("State must Exist!");
+  } else if (!postalcode) {
+    throw new Error("PostalCode must Exist!");
+  } else if (!country) {
+    throw new Error("Country must Exist!");
   }
 };
 
