@@ -91,4 +91,39 @@ listingRouter.patch("/editlisting/:listingId", userAuth, async (req, res) => {
   }
 });
 
+listingRouter.delete(
+  "/deletelisting/:listingId",
+  userAuth,
+  async (req, res) => {
+    try {
+      const listingId = req.params.listingId;
+      if (!listingId) {
+        throw new Error("Listing Id does not Exist!");
+      }
+      const findListing = await Listing.findById({ _id: listingId });
+      const userId = req.user._id;
+      if (!userId.equals(findListing.owner._id)) {
+        throw new Error("Listing Owner Not valid!");
+      }
+      if (!findListing) {
+        throw new Error("Listing does not Exist!");
+      }
+      const deletedListing = await Listing.findByIdAndDelete({
+        _id: listingId,
+      });
+
+      res.json({
+        success: true,
+        status: 200,
+        message: "Listing has been Deleted!",
+        deletedListing,
+      });
+    } catch (error) {
+      res
+        .status(400)
+        .json({ success: false, status: 400, message: error.message });
+    }
+  }
+);
+
 module.exports = listingRouter;
