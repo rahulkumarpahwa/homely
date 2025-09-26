@@ -1,7 +1,7 @@
 import { useReducer } from "react";
-import { reducer, intialState } from "../utils/loginReducer";
+import { reducer, intialState } from "../../utils/loginReducer";
 import axios from "axios";
-import { BASE_URL } from "../utils/constants";
+import { BASE_URL } from "../../utils/constants";
 import { useNavigate } from "react-router-dom";
 
 export const Login = () => {

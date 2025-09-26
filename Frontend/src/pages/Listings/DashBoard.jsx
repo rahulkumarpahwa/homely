@@ -1,6 +1,6 @@
 import axios from "axios";
-import { ListingCard } from "../components/ListingCard";
-import { BASE_URL } from "../utils/constants";
+import { ListingCard } from "../../components/ListingCard";
+import { BASE_URL } from "../../utils/constants";
 import { useState } from "react";
 
 const DashBoard = () => {
