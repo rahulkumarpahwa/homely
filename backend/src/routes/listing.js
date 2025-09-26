@@ -9,9 +9,10 @@ const listingRouter = express.Router();
 
 listingRouter.post("/create", userAuth, async (req, res) => {
   try {
+    const owner = req.user._id;
     validateNewListing(req);
     // future : add the validation that the current listing exist previously or not!
-    const newListing = new Listing({ ...req.body });
+    const newListing = new Listing({ ...req.body, owner });
     await newListing.save();
     res.json({ success: true, status: 200, message: newListing });
   } catch (error) {
