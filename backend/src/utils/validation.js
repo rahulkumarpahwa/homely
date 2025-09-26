@@ -62,4 +62,34 @@ const validateNewListing = (req) => {
   }
 };
 
-module.exports = { validateSignUpData, editValidation, validateNewListing };
+const validateEditListing = (req) => {
+  const { title, description, imageUrl, street, location } = req.body;
+  if (!title || !description) {
+    throw new Error("Title and Description must exist!");
+  } else if (!street) {
+    throw new Error("Address/Street must Exist!");
+  }
+
+  const isImageSafe = imageUrl.every((value) => validator.isURL(value));
+  if (!isImageSafe) {
+    throw new Error("Enter a valid Image Url!");
+  }
+
+  const { city, state, postalcode, country } = location;
+  if (!city) {
+    throw new Error("City must Exist");
+  } else if (!state) {
+    throw new Error("State must Exist!");
+  } else if (!postalcode) {
+    throw new Error("PostalCode must Exist!");
+  } else if (!country) {
+    throw new Error("Country must Exist!");
+  }
+};
+
+module.exports = {
+  validateSignUpData,
+  editValidation,
+  validateNewListing,
+  validateEditListing,
+};
