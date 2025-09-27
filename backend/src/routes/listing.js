@@ -6,6 +6,7 @@ const {
 } = require("../utils/validation");
 const { Listing } = require("../models/listing");
 const listingRouter = express.Router();
+const axios = require("axios");
 
 listingRouter.post("/create", userAuth, async (req, res) => {
   try {
@@ -125,5 +126,22 @@ listingRouter.delete(
     }
   }
 );
+
+listingRouter.get("/getcoordinates", userAuth, async (req, res) => {
+  try {
+    const { street, city, state, country, postalcode } = req.body;
+    // pending : add sanitation and validation
+    const response = await axios.get(
+      `https://geocode.maps.co/search?street=${street}&city=${city}&state=${state}&postalcode=${postalcode}&country=${country}&api_key=${process.env.MAP_API_KEY}`,
+      { withCredentials: true }
+    );
+    // console.log(response.data);
+    const { lat, lon } = response.data[0];
+    res.json({ lat, lon, data: response.data[0] });
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, status: 400, message: error.message });
+  }
+});
 
 module.exports = listingRouter;

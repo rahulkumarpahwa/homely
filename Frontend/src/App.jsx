@@ -6,8 +6,9 @@ import GetInvolved from "./pages/getInvolved";
 import { Navbar } from "./components/Navbar.jsx";
 import { Footer } from "./components/Footer.jsx";
 import GetHelp from "./pages/gethelp.jsx";
-import { Login } from "./pages/Login.jsx";
-import DashBoard from "./pages/DashBoard.jsx";
+import { Login } from "./pages/Auth/Login.jsx";
+import DashBoard from "./pages/Listings/DashBoard.jsx";
+import CreateListing from "./pages/Listings/CreateListing.jsx";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/gethelp" element={<GetHelp />} />
         <Route path="/login" element={<Login />} />
         <Route path="/dashboard" element={<DashBoard />} />
+        <Route path="/createlisting" element={<CreateListing />} />
       </Routes>
       <Footer />
     </BrowserRouter>

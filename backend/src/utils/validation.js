@@ -33,13 +33,11 @@ const editValidation = (req) => {
 };
 
 const validateNewListing = (req) => {
-  const { title, description, imageUrl, street, location, rating } = req.body;
+  const { title, description, imageUrl, street, location} = req.body;
   if (!title || !description) {
     throw new Error("Title and Description must exist!");
   } else if (!street) {
     throw new Error("Address/Street must Exist!");
-  } else if (rating > 5 && rating < 1) {
-    throw new Error("Enter a valid rating (1-5)");
   }
 
   const isImageSafe = imageUrl.every((value) => validator.isURL(value));
