@@ -1,5 +1,6 @@
 import { IoIosRemoveCircle } from "react-icons/io";
 import { RiEdit2Line } from "react-icons/ri";
+import { Map } from "../components/Map.jsx";
 
 export const ListingCard = (props) => {
   const { _id, owner, title, description, imageUrl, map, rating } = props.data;
@@ -29,18 +30,7 @@ export const ListingCard = (props) => {
           </div>
         ))}
       </div>
-      <div className="w-48 h-48">
-        <iframe
-          className="border border-black rounded-xl"
-          src={`https://maps.google.com/maps?q=${markerLat},${markerLon}&z=16&output=embed`}
-          width="100%"
-          height="100%"
-          allowFullScreen=""
-          loading="lazy"
-          referrerPolicy="no-referrer-when-downgrade"
-          title={`map-${_id}`}
-        ></iframe>
-      </div>
+      <Map _id={_id} markerLat={markerLat} markerLon={markerLon} />
       <div className="flex flex-col items-center justify-center text-2xl gap-3">
         <button>
           <IoIosRemoveCircle />

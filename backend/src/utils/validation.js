@@ -40,7 +40,7 @@ const validateNewListing = (req) => {
     throw new Error("Address/Street must Exist!");
   }
 
-  const isImageSafe = imageUrl.every((value) => validator.isURL(value));
+  const isImageSafe = Array.isArray(imageUrl) && imageUrl.every((value) => validator.isURL(value));
   if (!isImageSafe) {
     throw new Error("Enter a valid Image Url!");
   }

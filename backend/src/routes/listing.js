@@ -12,6 +12,7 @@ listingRouter.post("/create", userAuth, async (req, res) => {
   try {
     const owner = req.user._id;
     validateNewListing(req);
+
     // future : add the validation that the current listing exist previously or not!
     const newListing = new Listing({ ...req.body, owner });
     await newListing.save();
@@ -127,7 +128,7 @@ listingRouter.delete(
   }
 );
 
-listingRouter.get("/getcoordinates", userAuth, async (req, res) => {
+listingRouter.post("/getcoordinates", userAuth, async (req, res) => {
   try {
     const { street, city, state, country, postalcode } = req.body;
     // pending : add sanitation and validation
@@ -136,7 +137,7 @@ listingRouter.get("/getcoordinates", userAuth, async (req, res) => {
       { withCredentials: true }
     );
     // console.log(response.data);
-    const { lat, lon } = response.data[0];
+    const { lat, lon } = response?.data[0];
     res.json({ lat, lon, data: response.data[0] });
   } catch (error) {
     console.log(error);

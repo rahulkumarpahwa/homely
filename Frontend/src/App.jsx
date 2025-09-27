@@ -9,23 +9,27 @@ import GetHelp from "./pages/gethelp.jsx";
 import { Login } from "./pages/Auth/Login.jsx";
 import DashBoard from "./pages/Listings/DashBoard.jsx";
 import CreateListing from "./pages/Listings/CreateListing.jsx";
+import { Provider } from "react-redux";
+import { store } from "./utils/appStore.js";
 
 function App() {
   return (
-    <BrowserRouter>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<Homely />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/donate" element={<Donate />} />
-        <Route path="/getinvolved" element={<GetInvolved />} />
-        <Route path="/gethelp" element={<GetHelp />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/dashboard" element={<DashBoard />} />
-        <Route path="/createlisting" element={<CreateListing />} />
-      </Routes>
-      <Footer />
-    </BrowserRouter>
+    <Provider store={store}>
+      <BrowserRouter>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Homely />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/donate" element={<Donate />} />
+          <Route path="/getinvolved" element={<GetInvolved />} />
+          <Route path="/gethelp" element={<GetHelp />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/dashboard" element={<DashBoard />} />
+          <Route path="/createlisting" element={<CreateListing />} />
+        </Routes>
+        <Footer />
+      </BrowserRouter>
+    </Provider>
   );
 }
 

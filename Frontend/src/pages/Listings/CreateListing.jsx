@@ -1,8 +1,16 @@
 import { useReducer } from "react";
 import { initialState, reducer } from "../../utils/createListingReducer";
+import axios from "axios";
+import { BASE_URL } from "../../utils/constants";
+import toast, { Toaster } from "react-hot-toast";
+import { Map } from "../../components/Map";
+import { useDispatch, useSelector } from "react-redux";
+import { addListing, addListingMap } from "../../utils/listingSlice";
 
 const CreateListing = () => {
   const [state, dispatcher] = useReducer(reducer, initialState);
+  const listingStore = useSelector((store) => store.listing);
+  const storedispatcher = useDispatch();
 
   const setTitle = (title) => {
     dispatcher({ type: "SET_TITLE", payload: title });
@@ -23,15 +31,53 @@ const CreateListing = () => {
     dispatcher({ type: "SET_LOCATION", payload: location });
   };
 
+  const { city, country, postalcode } = state.location;
+
+  const handleGetMaps = async () => {
+    try {
+      if (
+        state.street &&
+        city &&
+        state.location.state &&
+        country &&
+        postalcode
+      ) {
+        const response = await axios.post(
+          BASE_URL + "/list/getcoordinates",
+          { street: state.street, ...state.location },
+          { withCredentials: true }
+        );
+        const { lat, lon } = response.data;
+        storedispatcher(addListingMap({ lat, lon }));
+        console.log(response?.data);
+      } else {
+        toast.error("Street & Location values must be filled!");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleSendListing = async () => {
+    try {
+      const response = await axios.post(
+        BASE_URL + "/list/create",
+        { ...state, map: listingStore.map },
+        { withCredentials: true }
+      );
+      console.log(response?.data?.message);
+      storedispatcher(addListing(response?.data?.message));
+    } catch (error) {
+      console.log(error);
+      toast.error(error?.response?.message || error.message + "!");
+      console.log(error?.response?.message || error.message);
+      console.log(error);
+    }
+  };
+
   return (
     <div className="min-h-[80vh] flex flex-col items-center justify-center">
       <h1 className="font-bold text-5xl mb-8">Create Your New Listing</h1>
-
-      <p>
-        {state.title} {state.description} {state.imageUrl} {state.street}{" "}
-        {state.location.state}
-        {state.location.city}
-      </p>
 
       <div className="border-2 p-8 rounded-xl flex items-center flex-col justify-center">
         <div className="flex flex-col items-start w-80 py-1 ">
@@ -68,7 +114,10 @@ const CreateListing = () => {
           <input
             type="text"
             value={state.imageUrl}
-            onChange={(e) => setImageUrl(e.target.value)}
+            onChange={(e) => {
+              const arr = e.target.value.split(",").map((item) => item.trim());
+              setImageUrl(arr);
+            }}
             className="border border-black w-full rounded-sm px-2 py-1"
             placeholder="Enter ImageURLs"
           />
@@ -89,6 +138,14 @@ const CreateListing = () => {
           <p htmlFor="Location" className="text-sm font-medium mb-1 ml-1">
             Location
           </p>
+
+          {listingStore && listingStore?.map?.lat && listingStore?.map?.lon && (
+            <Map
+              markerLat={listingStore.map.lat}
+              markerLon={listingStore.map.lon}
+            />
+          )}
+
           <div className="grid grid-cols-2 gap-2">
             <div>
               <p htmlFor="Location" className="text-sm font-medium mb-1 ml-1">
@@ -152,11 +209,18 @@ const CreateListing = () => {
           </div>
         </div>
 
+        <Toaster />
         <div className="flex items-center justify-center gap-5 mt-4">
-          <button className="bg-black text-white px-6 py-2 rounded font-medium  hover:bg-[#005c7a] hover:text-white transition-transform transform hover:scale-105">
+          <button
+            className="bg-black text-white px-6 py-2 rounded font-medium  hover:bg-[#005c7a] hover:text-white transition-transform transform hover:scale-105"
+            onClick={handleGetMaps}
+          >
             Create Map
           </button>
-          <button className="bg-black text-white px-6 py-2 rounded font-medium  hover:bg-[#005c7a] hover:text-white transition-transform transform hover:scale-105">
+          <button
+            className="bg-black text-white px-6 py-2 rounded font-medium  hover:bg-[#005c7a] hover:text-white transition-transform transform hover:scale-105"
+            onClick={handleSendListing}
+          >
             Create Listing
           </button>
         </div>

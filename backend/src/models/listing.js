@@ -66,14 +66,6 @@ const listingSchema = new mongoose.Schema(
       lon: {
         type: String,
       },
-      boxbounding: {
-        type: [String],
-        validation(value) {
-          if (value.length != 4) {
-            throw new Error("Box Bounding Must contain the four values!");
-          }
-        },
-      },
     },
   },
   { timestamps: true }
