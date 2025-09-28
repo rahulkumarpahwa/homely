@@ -5,12 +5,14 @@ import { BASE_URL } from "../../utils/constants";
 import toast, { Toaster } from "react-hot-toast";
 import { Map } from "../../components/Map";
 import { useDispatch, useSelector } from "react-redux";
-import { addListing, addListingMap } from "../../utils/listingSlice";
+import { addListingMap } from "../../utils/listingSlice";
+import { useNavigate } from "react-router-dom";
 
 const CreateListing = () => {
   const [state, dispatcher] = useReducer(reducer, initialState);
   const listingStore = useSelector((store) => store.listing);
   const storedispatcher = useDispatch();
+  const navigate = useNavigate();
 
   const setTitle = (title) => {
     dispatcher({ type: "SET_TITLE", payload: title });
@@ -66,7 +68,8 @@ const CreateListing = () => {
         { withCredentials: true }
       );
       console.log(response?.data?.message);
-      storedispatcher(addListing(response?.data?.message));
+      toast.success("Your Listing has been added!");
+      return navigate("/dashboard");
     } catch (error) {
       console.log(error);
       toast.error(error?.response?.message || error.message + "!");

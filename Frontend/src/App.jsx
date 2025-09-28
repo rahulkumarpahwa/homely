@@ -11,6 +11,7 @@ import DashBoard from "./pages/Listings/DashBoard.jsx";
 import CreateListing from "./pages/Listings/CreateListing.jsx";
 import { Provider } from "react-redux";
 import { store } from "./utils/appStore.js";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
         </Routes>
         <Footer />
       </BrowserRouter>
+      <Toaster />
     </Provider>
   );
 }

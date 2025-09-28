@@ -2,10 +2,10 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const listingSlice = createSlice({
   name: "listing",
-  initialState: {},
+  initialState: null,
   reducers: {
     addListing: (state, actions) => {
-      return { ...state, ...actions.payload };
+      return actions.payload;
     },
     removeListing: () => {
       return null;

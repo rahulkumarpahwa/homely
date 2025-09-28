@@ -1,32 +1,53 @@
+/* eslint-disable */
 import axios from "axios";
 import { ListingCard } from "../../components/ListingCard";
 import { BASE_URL } from "../../utils/constants";
-import { useState } from "react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { addListing } from "../../utils/listingSlice";
 
 const DashBoard = () => {
-  const [data, setData] = useState([]);
+  const listingStore = useSelector((store) => store.listing);
+  const dispatch = useDispatch();
   const handleListingData = async () => {
+    if (listingStore) return;
     try {
       const response = await axios.get(BASE_URL + "/list/yourlistings", {
         withCredentials: true,
       });
-      console.log(response);
-      setData(response?.data?.message);
-      console.log(response?.data?.message);
+      // console.log(response?.data?.message);
+      dispatch(addListing(response?.data?.message));
     } catch (error) {
       console.log(error);
     }
   };
 
-//   if(data) return;
-//   if(data && data.length == 0) return <div> NO DATA FOUND!</div>
+  useEffect(() => {
+    handleListingData();
+  }, []);
+
+  if (!listingStore) return;
+  if (listingStore && listingStore.length == 0)
+    return <div> NO DATA FOUND!</div>;
   return (
-    <div>
-      {data.map((obj) => (
-        <ListingCard key={obj._id} data={obj} />
-      ))}
-      <button onClick={handleListingData}>click</button>
-    </div>
+    listingStore && (
+      <div className="min-h-[80vh] flex flex-col justify-center items-center gap-5 py-16">
+        <h1 className="text-5xl font-bold">Dashboard</h1>
+
+        <div className="flex flex-col items-center justify-center gap-5">
+          <h2 className="text-3xl font-semibold">Your Listings</h2>
+          <div className="flex flex-col justify-center items-center gap-2">
+            {listingStore.map((obj) => (
+              <ListingCard key={obj._id} data={obj} />
+            ))}
+          </div>
+        </div>
+
+        <div className="flex flex-col items-center justify-center gap-5">
+          <h2 className="text-3xl font-semibold">Your Donations</h2>
+        </div>
+      </div>
+    )
   );
 };
 
