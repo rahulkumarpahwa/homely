@@ -7,18 +7,12 @@ const listingSlice = createSlice({
     addListing: (state, actions) => {
       return actions.payload;
     },
-    removeListing: () => {
-      return null;
-    },
-    addListingMap: (state, actions) => {
-      return { ...state, map: actions.payload };
-    },
-    removeListingMap: (state) => {
-      return { ...state, map: null };
+    removeListing: (state, actions) => {
+      const newStateArr = state.filter((obj) => obj._id != actions.payload);
+      return newStateArr;
     },
   },
 });
 
-export const { addListing, removeListing, addListingMap, removeListingMap } =
-  listingSlice.actions;
+export const { addListing, removeListing } = listingSlice.actions;
 export default listingSlice.reducer;

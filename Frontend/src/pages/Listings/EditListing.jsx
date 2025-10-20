@@ -1,86 +1,28 @@
 import { useReducer } from "react";
-import { initialState, reducer } from "../../utils/createListingReducer";
-import axios from "axios";
-import { BASE_URL } from "../../utils/constants";
-import toast, { Toaster } from "react-hot-toast";
+import { useSelector } from "react-redux";
+import { reducer } from "../../utils/editListingReducer";
+import { useLocation } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
 import { Map } from "../../components/Map";
-import { useDispatch, useSelector } from "react-redux";
-import { addMap } from "../../utils/mapSlice";
-import { useNavigate } from "react-router-dom";
+import useMaps from "../../utils/useMaps";
 
-const CreateListing = () => {
-  const [state, dispatcher] = useReducer(reducer, initialState);
+const EditListing = () => {
+  // taking the listing id from the query params:
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const listingId = queryParams.get("id");
+
   const listingStore = useSelector((store) => store.listing);
-  const storedispatcher = useDispatch();
-  const navigate = useNavigate();
+  const initialState = listingStore.filter((list) => list._id === listingId)[0];
+  console.log(initialState);
+  const [state, dispatch] = useReducer(reducer, initialState);
 
-  const setTitle = (title) => {
-    dispatcher({ type: "SET_TITLE", payload: title });
-  };
-
-  const setDescription = (description) => {
-    dispatcher({ type: "SET_DESCRIPTION", payload: description });
-  };
-
-  const setStreet = (street) => {
-    dispatcher({ type: "SET_STREET", payload: street });
-  };
-
-  const setImageUrl = (imageUrl) => {
-    dispatcher({ type: "SET_IMAGEURL", payload: imageUrl });
-  };
-  const setLocation = (location) => {
-    dispatcher({ type: "SET_LOCATION", payload: location });
-  };
-
-  const { city, country, postalcode } = state.location;
-
-  const handleGetMaps = async () => {
-    try {
-      if (
-        state.street &&
-        city &&
-        state.location.state &&
-        country &&
-        postalcode
-      ) {
-        const response = await axios.post(
-          BASE_URL + "/list/getcoordinates",
-          { street: state.street, ...state.location },
-          { withCredentials: true }
-        );
-        const { lat, lon } = response.data;
-        storedispatcher(addMap({ lat, lon }));
-        console.log(response?.data);
-      } else {
-        toast.error("Street & Location values must be filled!");
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const handleSendListing = async () => {
-    try {
-      const response = await axios.post(
-        BASE_URL + "/list/create",
-        { ...state, map: listingStore.map },
-        { withCredentials: true }
-      );
-      console.log(response?.data?.message);
-      toast.success("Your Listing has been added!");
-      return navigate("/dashboard");
-    } catch (error) {
-      console.log(error);
-      toast.error(error?.response?.message || error.message + "!");
-      console.log(error?.response?.message || error.message);
-      console.log(error);
-    }
-  };
+  const handleGetMaps = useMaps();
+  
 
   return (
     <div className="min-h-[80vh] flex flex-col items-center justify-center">
-      <h1 className="font-bold text-5xl mb-8">Create Your New Listing</h1>
+      <h1 className="font-bold text-5xl mb-8">Update Your Listing</h1>
 
       <div className="border-2 p-8 rounded-xl flex items-center flex-col justify-center">
         <div className="flex flex-col items-start w-80 py-1 ">
@@ -90,7 +32,9 @@ const CreateListing = () => {
           <input
             type="text"
             value={state.title}
-            onChange={(e) => setTitle(e.target.value)}
+            onChange={(e) =>
+              dispatch({ type: "NEW_TITLE", payload: e.target.value })
+            }
             className="border border-black w-full rounded-sm px-2 py-1"
             placeholder="Enter Title"
           />
@@ -105,7 +49,9 @@ const CreateListing = () => {
           <input
             type="text"
             value={state.description}
-            onChange={(e) => setDescription(e.target.value)}
+            onChange={(e) =>
+              dispatch({ type: "NEW_DESCRIPTION", payload: e.target.value })
+            }
             className="border border-black w-full rounded-sm px-2 py-1"
             placeholder="Enter Description"
           />
@@ -119,7 +65,7 @@ const CreateListing = () => {
             value={state.imageUrl}
             onChange={(e) => {
               const arr = e.target.value.split(",").map((item) => item.trim());
-              setImageUrl(arr);
+              dispatch({ type: "NEW_IMAGEURL", payload: arr });
             }}
             className="border border-black w-full rounded-sm px-2 py-1"
             placeholder="Enter ImageURLs"
@@ -132,7 +78,9 @@ const CreateListing = () => {
           <input
             type="text"
             value={state.street}
-            onChange={(e) => setStreet(e.target.value)}
+            onChange={(e) =>
+              dispatch({ type: "NEW_STREET", payload: e.target.value })
+            }
             className="border border-black w-full rounded-sm px-2 py-1"
             placeholder="Enter Street"
           />
@@ -142,12 +90,7 @@ const CreateListing = () => {
             Location
           </p>
 
-          {listingStore && listingStore?.map?.lat && listingStore?.map?.lon && (
-            <Map
-              markerLat={listingStore.map.lat}
-              markerLon={listingStore.map.lon}
-            />
-          )}
+          <Map markerLat={state.map.lat} markerLon={state.map.lon} />
 
           <div className="grid grid-cols-2 gap-2">
             <div>
@@ -157,7 +100,10 @@ const CreateListing = () => {
               <input
                 value={state.location.city}
                 onChange={(e) =>
-                  setLocation({ ...state.location, city: e.target.value })
+                  dispatch({
+                    type: "NEW_LOCATION",
+                    payload: { ...state.location, city: e.target.value },
+                  })
                 }
                 type="text"
                 className="border border-black w-full rounded-sm px-2 py-1"
@@ -171,7 +117,10 @@ const CreateListing = () => {
               <input
                 value={state.location.state}
                 onChange={(e) =>
-                  setLocation({ ...state.location, state: e.target.value })
+                  dispatch({
+                    type: "NEW_LOCATION",
+                    payload: { ...state.location, state: e.target.value },
+                  })
                 }
                 type="text"
                 className="border border-black w-full rounded-sm px-2 py-1"
@@ -185,7 +134,10 @@ const CreateListing = () => {
               <input
                 value={state.location.country}
                 onChange={(e) =>
-                  setLocation({ ...state.location, country: e.target.value })
+                  dispatch({
+                    type: "NEW_LOCATION",
+                    payload: { ...state.location, country: e.target.value },
+                  })
                 }
                 type="text"
                 className="border border-black w-full rounded-sm px-2 py-1"
@@ -203,7 +155,10 @@ const CreateListing = () => {
                 type="text"
                 value={state.location.postalcode}
                 onChange={(e) =>
-                  setLocation({ ...state.location, postalcode: e.target.value })
+                  dispatch({
+                    type: "NEW_LOCATION",
+                    payload: { ...state.location, postalcode: e.target.value },
+                  })
                 }
                 className="border border-black w-full rounded-sm px-2 py-1"
                 placeholder="Enter Postal Code"
@@ -216,15 +171,12 @@ const CreateListing = () => {
         <div className="flex items-center justify-center gap-5 mt-4">
           <button
             className="bg-black text-white px-6 py-2 rounded font-medium  hover:bg-[#005c7a] hover:text-white transition-transform transform hover:scale-105"
-            onClick={handleGetMaps}
+            onClick={() => handleGetMaps(state.street, state.location)}
           >
             Create Map
           </button>
-          <button
-            className="bg-black text-white px-6 py-2 rounded font-medium  hover:bg-[#005c7a] hover:text-white transition-transform transform hover:scale-105"
-            onClick={handleSendListing}
-          >
-            Create Listing
+          <button className="bg-black text-white px-6 py-2 rounded font-medium  hover:bg-[#005c7a] hover:text-white transition-transform transform hover:scale-105">
+            Update Listing
           </button>
         </div>
       </div>
@@ -232,4 +184,4 @@ const CreateListing = () => {
   );
 };
 
-export default CreateListing;
+export default EditListing;
