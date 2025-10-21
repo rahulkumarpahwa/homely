@@ -6,14 +6,13 @@ import GetInvolved from "./pages/getInvolved";
 import { Navbar } from "./components/Navbar.jsx";
 import { Footer } from "./components/Footer.jsx";
 import GetHelp from "./pages/gethelp.jsx";
-import { Login } from "./pages/Auth/Login.jsx";
 import DashBoard from "./pages/Listings/DashBoard.jsx";
 import CreateListing from "./pages/Listings/CreateListing.jsx";
 import { Provider } from "react-redux";
 import { store } from "./utils/appStore.js";
 import { Toaster } from "react-hot-toast";
 import EditListing from "./pages/Listings/EditListing.jsx";
-import Signup from "./pages/Auth/Signup.jsx";
+import Auth from "./pages/Auth/Auth.jsx";
 
 function App() {
   return (
@@ -26,8 +25,7 @@ function App() {
           <Route path="/donate" element={<Donate />} />
           <Route path="/getinvolved" element={<GetInvolved />} />
           <Route path="/gethelp" element={<GetHelp />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
+          <Route path="/join" element={<Auth />} />
           <Route path="/dashboard" element={<DashBoard />} />
           <Route path="/createlisting" element={<CreateListing />} />
           <Route path="/editlisting" element={<EditListing />} />
