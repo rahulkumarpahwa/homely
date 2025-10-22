@@ -6,7 +6,7 @@ import axios from "axios";
 import { BASE_URL } from ".././utils/constants.js";
 import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
-import { removeListing } from "../utils/listingSlice.js";
+import { removeListing } from "../utils/reduxStore/listingSlice.js";
 import { useNavigate } from "react-router-dom";
 
 export const ListingCard = (props) => {

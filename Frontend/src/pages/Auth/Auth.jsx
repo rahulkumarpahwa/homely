@@ -1,15 +1,18 @@
-import { reducer, initialState } from "../../utils/authReducer.js";
+import { reducer, initialState } from "../../utils/reducers/authReducer.js";
 import { useReducer, useState } from "react";
 
 import axios from "axios";
 import { BASE_URL } from "../../utils/constants";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import { useDispatch } from "react-redux";
+import { addUser } from "../../utils/reduxStore/userSlice.js";
 
 const Auth = () => {
   const [state, dispatcher] = useReducer(reducer, initialState);
   const navigate = useNavigate();
   const [isLoginPage, setIsLoginPage] = useState(true);
+  const storeDispatcher = useDispatch();
 
   const setEmail = (email) => {
     dispatcher({ type: "SET_EMAIL", payload: email });
@@ -42,6 +45,7 @@ const Auth = () => {
         { email: state.email, password: state.password },
         { withCredentials: true }
       );
+      storeDispatcher(addUser(response?.data?.user));
       console.log(response);
       toast.success("User LoggedIn Successfully!");
       return navigate("/dashboard");

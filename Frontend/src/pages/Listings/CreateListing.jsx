@@ -1,11 +1,14 @@
 import { useReducer } from "react";
-import { initialState, reducer } from "../../utils/createListingReducer";
+import {
+  initialState,
+  reducer,
+} from "../../utils/reducers/createListingReducer";
 import axios from "axios";
 import { BASE_URL } from "../../utils/constants";
 import toast, { Toaster } from "react-hot-toast";
 import { Map } from "../../components/Map";
 import { useDispatch, useSelector } from "react-redux";
-import { addMap } from "../../utils/mapSlice";
+import { addMap } from "../../utils/reduxStore/mapSlice";
 import { useNavigate } from "react-router-dom";
 
 const CreateListing = () => {

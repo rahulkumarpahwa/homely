@@ -4,7 +4,7 @@ import { ListingCard } from "../../components/ListingCard";
 import { BASE_URL } from "../../utils/constants";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addListing } from "../../utils/listingSlice";
+import { addListing } from "../../utils/reduxStore/listingSlice";
 
 const DashBoard = () => {
   const listingStore = useSelector((store) => store.listing);

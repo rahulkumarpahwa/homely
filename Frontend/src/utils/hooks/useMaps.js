@@ -1,8 +1,8 @@
 import axios from "axios";
-import { BASE_URL } from "./constants";
+import { BASE_URL } from "../constants";
 import { useDispatch } from "react-redux";
 import toast from "react-hot-toast";
-import { addMap } from "./mapSlice";
+import { addMap } from "../reduxStore/mapSlice";
 
 const useMaps = () => {
   const dispatcher = useDispatch();
