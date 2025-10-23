@@ -5,7 +5,7 @@ import { BASE_URL } from "../../utils/constants";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addListing } from "../../utils/reduxStore/listingSlice";
-import LoginNavbar from "../Auth/LoginNavbar";
+import LoginNavbar from "../../components/LoginNavbar";
 
 const DashBoard = () => {
   const listingStore = useSelector((store) => store.listing);

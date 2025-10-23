@@ -1,7 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
-import { User } from "../../components/svg/user";
-import { Logout } from "../../components/svg/Logout";
-import { removeUser } from "../../utils/reduxStore/userSlice";
+import { User } from "./svg/user";
+import { Logout } from "./svg/Logout";
+import { Profile } from "./svg/Profile";
+import { Edit } from "./svg/Edit";
+import { CreateListing } from "./svg/CreateListing";
+import { Donate } from "./svg/Donate";
+import { removeUser } from "../utils/reduxStore/userSlice";
 import { useState } from "react";
 
 const LoginNavbar = () => {
@@ -33,16 +37,18 @@ const LoginNavbar = () => {
             onmouseleave={() => setDropDown(false)}
           >
             <ul>
-              <li className="border-b-2 border-[#004156]  font-semibold hover:text-white hover:bg-[#004156] rounded-tl-sm rounded-tr-sm">
-                Profile
+              <li className="flex items-center justify-center gap-2 border-b-2 border-[#004156]  font-semibold hover:text-white hover:bg-[#004156] rounded-tl-sm rounded-tr-sm">
+                <Profile /> Profile
               </li>
-              <li className="border-b-2 border-[#004156] text-[#004156] font-semibold hover:text-white hover:bg-[#004156]">
-                Edit Profile
+              <li className=" flex items-center justify-center gap-2 border-b-2 border-[#004156] text-[#004156] font-semibold hover:text-white hover:bg-[#004156]">
+                <Edit /> Edit Profile
               </li>
-              <li className="border-b-2 border-[#004156] text-[#004156] font-semibold hover:text-white hover:bg-[#004156]">
+              <li className=" flex items-center justify-center gap-2 border-b-2 border-[#004156] text-[#004156] font-semibold hover:text-white hover:bg-[#004156]">
+                <CreateListing />
                 Create Listing
               </li>
-              <li className=" text-[#004156] font-semibold hover:text-white hover:bg-[#004156]">
+              <li className="flex items-center justify-center gap-2 text-[#004156] font-semibold hover:text-white hover:bg-[#004156]">
+                <Donate />
                 Donate
               </li>
             </ul>
