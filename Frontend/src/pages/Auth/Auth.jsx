@@ -62,6 +62,7 @@ const Auth = () => {
         { ...state },
         { withCredentials: true }
       );
+      dispatcher(addUser(response?.data?.user));
       console.log(response);
       toast.success("User Signup SuccessFully!");
       return navigate("/dashboard");

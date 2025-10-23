@@ -5,7 +5,6 @@ import { BASE_URL } from "../../utils/constants";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addListing } from "../../utils/reduxStore/listingSlice";
-import LoginNavbar from "../../components/LoginNavbar";
 
 const DashBoard = () => {
   const listingStore = useSelector((store) => store.listing);
@@ -29,7 +28,7 @@ const DashBoard = () => {
 
   if (!listingStore) return;
   if (listingStore && listingStore.length == 0)
-    return <div> NO DATA FOUND!</div>;
+    return <div className="min-h-[80vh] flex flex-col justify-center items-center gap-5 pt-8 pb-16"> NO DATA FOUND!</div>;
   return (
     listingStore && (
       <div className="min-h-[80vh] flex flex-col justify-center items-center gap-5 pt-8 pb-16">

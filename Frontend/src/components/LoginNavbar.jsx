@@ -7,6 +7,7 @@ import { CreateListing } from "./svg/CreateListing";
 import { Donate } from "./svg/Donate";
 import { removeUser } from "../utils/reduxStore/userSlice";
 import { useState } from "react";
+import { Link } from "react-router";
 
 const LoginNavbar = () => {
   const user = useSelector((store) => store.user);
@@ -32,14 +33,14 @@ const LoginNavbar = () => {
         </div>
 
         {dropDown && (
-          <div
-            className="w-48 absolute h-50 border-2 text-center m-0.5 z-50 top-[100%] right-32 rounded bg-white border-[#004156] text-black"
-            onmouseleave={() => setDropDown(false)}
-          >
+          <div className="w-48 absolute h-50 border-2 text-center m-0.5 z-50 top-[100%] right-32 rounded bg-white border-[#004156] text-black">
             <ul>
-              <li className="flex items-center justify-center gap-2 border-b-2 border-[#004156]  font-semibold hover:text-white hover:bg-[#004156] rounded-tl-sm rounded-tr-sm">
+              <Link
+                className="flex items-center justify-center gap-2 border-b-2 border-[#004156]  font-semibold hover:text-white hover:bg-[#004156] rounded-tl-sm rounded-tr-sm"
+                to="/profile"
+              >
                 <Profile /> Profile
-              </li>
+              </Link>
               <li className=" flex items-center justify-center gap-2 border-b-2 border-[#004156] text-[#004156] font-semibold hover:text-white hover:bg-[#004156]">
                 <Edit /> Edit Profile
               </li>

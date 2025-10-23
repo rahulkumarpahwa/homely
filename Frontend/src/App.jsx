@@ -13,6 +13,8 @@ import EditListing from "./pages/Listings/EditListing.jsx";
 import Auth from "./pages/Auth/Auth.jsx";
 import ProtectedRoute from "./pages/Auth/ProctectedRoute.jsx";
 import Home from "./pages/Home.jsx";
+import Profile from "./pages/User/Profile.jsx";
+import EditProfile from "./pages/User/EditProfile.jsx";
 
 function App() {
   return (
@@ -26,6 +28,22 @@ function App() {
             <Route path="/getinvolved" element={<GetInvolved />} />
             <Route path="/gethelp" element={<GetHelp />} />
             <Route path="/join" element={<Auth />} />
+            <Route
+              path="/profile"
+              element={
+                <ProtectedRoute>
+                  <Profile />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/edit-profile"
+              element={
+                <ProtectedRoute>
+                  <EditProfile />
+                </ProtectedRoute>
+              }
+            />
             <Route
               path="/dashboard"
               element={
