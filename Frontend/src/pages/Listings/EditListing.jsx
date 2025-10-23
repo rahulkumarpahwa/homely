@@ -1,7 +1,7 @@
 import { useReducer } from "react";
 import { useSelector } from "react-redux";
 import { reducer } from "../../utils/reducers/editListingReducer";
-import { useLocation } from "react-router-dom";
+import { useLocation } from "react-router";
 import { Toaster } from "react-hot-toast";
 import { Map } from "../../components/Map";
 import useMaps from "../../utils/hooks/useMaps";

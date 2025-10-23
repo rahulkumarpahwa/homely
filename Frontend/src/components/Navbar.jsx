@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
 export const Navbar = () => (
-  <nav className="flex flex-row mx-20 mt-3 items-center">
+  <nav className="flex flex-row mx-20 mt-3 mb-5  items-center">
     <Link
       className="font-extrabold text-2xl text-[#005c7a] no-underline mr-8"
       to="/"

@@ -33,7 +33,6 @@ const DashBoard = () => {
   return (
     listingStore && (
       <div className="min-h-[80vh] flex flex-col justify-center items-center gap-5 pt-8 pb-16">
-        <LoginNavbar />
         <h1 className="text-5xl font-bold">Dashboard</h1>
 
         <div className="flex flex-col items-center justify-center gap-5">

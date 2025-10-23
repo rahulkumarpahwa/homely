@@ -9,7 +9,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { Map } from "../../components/Map";
 import { useDispatch, useSelector } from "react-redux";
 import { addMap } from "../../utils/reduxStore/mapSlice";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 
 const CreateListing = () => {
   const [state, dispatcher] = useReducer(reducer, initialState);

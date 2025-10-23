@@ -3,7 +3,7 @@ import { useReducer, useState } from "react";
 
 import axios from "axios";
 import { BASE_URL } from "../../utils/constants";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { addUser } from "../../utils/reduxStore/userSlice.js";
