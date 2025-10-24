@@ -1,13 +1,13 @@
 import { IoIosRemoveCircle } from "react-icons/io";
 import { RiEdit2Line } from "react-icons/ri";
 import { Map } from "../components/Map.jsx";
-import { Link, Navigate } from "react-router-dom";
+import { Link } from "react-router";
 import axios from "axios";
 import { BASE_URL } from ".././utils/constants.js";
 import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { removeListing } from "../utils/reduxStore/listingSlice.js";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 
 export const ListingCard = (props) => {
   const { _id, owner, title, description, imageUrl, map, rating } = props.data;
@@ -78,7 +78,7 @@ export const ListingCard = (props) => {
         <div className="flex space-x-5">
           <button
             className="border-2 p-2  border-black hover:text-green-500 hover:border-green-500 rounded-xl flex items-center justify-center gap-3"
-            onClick={() => navigate(`/EditListing?id=${_id}`)}
+            onClick={() => navigate(`/edit-listing?id=${_id}`)}
           >
             <span>
               <RiEdit2Line />

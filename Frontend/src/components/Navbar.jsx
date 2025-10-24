@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 
 export const Navbar = () => (
   <nav className="flex flex-row mx-20 mt-3 mb-5  items-center">

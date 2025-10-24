@@ -8,6 +8,7 @@ import { Donate } from "./svg/Donate";
 import { removeUser } from "../utils/reduxStore/userSlice";
 import { useState } from "react";
 import { Link } from "react-router";
+import {DashBoard} from "./svg/DashBoard";
 
 const LoginNavbar = () => {
   const user = useSelector((store) => store.user);
@@ -37,17 +38,29 @@ const LoginNavbar = () => {
             <ul>
               <Link
                 className="flex items-center justify-center gap-2 border-b-2 border-[#004156]  font-semibold hover:text-white hover:bg-[#004156] rounded-tl-sm rounded-tr-sm"
+                to="/dashboard"
+              >
+                <DashBoard /> Dash Board
+              </Link>
+              <Link
+                className="flex items-center justify-center gap-2 border-b-2 border-[#004156]  font-semibold hover:text-white hover:bg-[#004156] rounded-tl-sm rounded-tr-sm"
                 to="/profile"
               >
                 <Profile /> Profile
               </Link>
-              <li className=" flex items-center justify-center gap-2 border-b-2 border-[#004156] text-[#004156] font-semibold hover:text-white hover:bg-[#004156]">
+              <Link
+                className=" flex items-center justify-center gap-2 border-b-2 border-[#004156] text-[#004156] font-semibold hover:text-white hover:bg-[#004156]"
+                to="/edit-profile"
+              >
                 <Edit /> Edit Profile
-              </li>
-              <li className=" flex items-center justify-center gap-2 border-b-2 border-[#004156] text-[#004156] font-semibold hover:text-white hover:bg-[#004156]">
+              </Link>
+              <Link
+                className=" flex items-center justify-center gap-2 border-b-2 border-[#004156] text-[#004156] font-semibold hover:text-white hover:bg-[#004156]"
+                to="/create-listing"
+              >
                 <CreateListing />
                 Create Listing
-              </li>
+              </Link>
               <li className="flex items-center justify-center gap-2 text-[#004156] font-semibold hover:text-white hover:bg-[#004156]">
                 <Donate />
                 Donate

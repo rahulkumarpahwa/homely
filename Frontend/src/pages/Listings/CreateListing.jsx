@@ -82,7 +82,7 @@ const CreateListing = () => {
   };
 
   return (
-    <div className="min-h-[80vh] flex flex-col items-center justify-center">
+    <div className="min-h-[80vh] py-16 flex flex-col items-center justify-center">
       <h1 className="font-bold text-5xl mb-8">Create Your New Listing</h1>
 
       <div className="border-2 p-8 rounded-xl flex items-center flex-col justify-center">

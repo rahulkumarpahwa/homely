@@ -1,14 +1,17 @@
 import axios from "axios";
 import toast from "react-hot-toast";
-import { useSelector } from "react-redux";
-import { Link } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router";
 import { BASE_URL } from "../../utils/constants";
 import { useReducer } from "react";
 import { reducer } from "../../utils/reducers/authReducer";
+import { addUser } from "../../utils/reduxStore/userSlice";
 
 const EditProfile = () => {
   const user = useSelector((store) => store.user);
   const [state, dispatcher] = useReducer(reducer, user);
+  const navigate = useNavigate();
+  const storeDispatch = useDispatch();
 
   const setFirstName = (firstName) => {
     dispatcher({ type: "SET_FIRSTNAME", payload: firstName });
@@ -26,9 +29,25 @@ const EditProfile = () => {
     try {
       const response = await axios.patch(
         BASE_URL + "/profile/edit",
-        { ...state },
+        {
+          firstName: state.firstName,
+          lastName: state.lastName,
+          address: state.address,
+        },
         { withCredentials: true }
       );
+      if (response?.data?.status == 200) {
+        storeDispatch(
+          addUser({
+            ...user,
+            firstName: state.firstName,
+            lastName: state.lastName,
+            address: state.address,
+          })
+        );
+        toast.success("Your Details has been updated!");
+        return navigate("/Profile");
+      }
       console.log(response);
     } catch (error) {
       console.log(error);
