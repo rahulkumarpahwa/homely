@@ -5,7 +5,7 @@ import { Toaster } from "react-hot-toast";
 
 import Homely from "./pages/homely";
 import About from "./pages/about";
-import Donate from "./pages/donate";
+import Donate from "./pages/Donate.jsx";
 import GetInvolved from "./pages/GetInvolved.jsx";
 import GetHelp from "./pages/gethelp.jsx";
 import DashBoard from "./pages/Listings/DashBoard.jsx";
