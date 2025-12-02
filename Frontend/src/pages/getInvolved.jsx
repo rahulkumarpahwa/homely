@@ -1,10 +1,8 @@
 const GetInvolved = () => {
   return (
     <>
-      {/* Add your get involved page content here, styled with Tailwind to match the original */}
       <div className="min-h-[60vh] flex flex-col items-center justify-center py-16">
         <h1 className="text-7xl font-bold text-[#005c7a] mb-8">Get Involved</h1>
-        {/* Add more content as per getInvolved.ejs */}
         <p className="text-3xl font-bold">Join more than 60,000 hosts who provide emergency housing in times of crisis.</p>
         <div className="flex gap-2 items-center">
           <div className=" p-4 my-8 text-[1.4rem] flex flex-col justify-center items-center">

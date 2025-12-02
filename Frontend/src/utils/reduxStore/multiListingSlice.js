@@ -7,8 +7,9 @@ const listingSlice = createSlice({
     addListing: (state, actions) => {
       return actions.payload;
     },
-    removeListing: () => {
-      return null;
+    removeListing: (state, actions) => {
+      const newStateArr = state.filter((obj) => obj._id != actions.payload);
+      return newStateArr;
     },
   },
 });

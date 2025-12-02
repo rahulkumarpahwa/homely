@@ -5,7 +5,7 @@ const mapSlice = createSlice({
   initialState: null,
   reducers: {
     addMap: (state, actions) => {
-      return { state: actions.payload };
+      return actions.payload;
     },
     removeMap: () => {
       return null;

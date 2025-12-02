@@ -7,12 +7,12 @@ const GetHelp = () => {
         <h1 className="text-7xl font-bold text-[#005c7a] mb-8">Get Help</h1>
         <p className="text-3xl font-bold">
           {" "}
-          <Link className="hover:underline" to="/signup">
+          <Link className="hover:underline" to="/join">
             {" "}
             SignUp
           </Link>{" "}
           or{" "}
-          <Link to="/login" className="hover:underline">
+          <Link to="/join" className="hover:underline">
             {" "}
             LogIn
           </Link>{" "}
